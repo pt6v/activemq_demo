@@ -1,6 +1,7 @@
 package io.github.alvinzhang86.activemq.topic;
 
 
+import io.github.alvinzhang86.activemq.Config;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
@@ -11,7 +12,6 @@ import java.util.concurrent.CountDownLatch;
  */
 public class Subscriber implements MessageListener {
 
-    private static final String BROKER_URL = "tcp://101.200.180.127:61616"; // mq地址
     private static final Boolean NON_TRANSACTED = false;
 
     private static final Boolean DURABLE = false; // 是否是持久订阅
@@ -24,13 +24,13 @@ public class Subscriber implements MessageListener {
     }
 
     public static void main(String[] args) {
-        String url = BROKER_URL;
+        String url = Config.BROKER_URL;
         if (args.length > 0) {
             url = args[0];
         }
 
         System.out.println("waiting... ");
-        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("admin", "admin", url);
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(Config.MQ_USER, Config.MQ_PASSWORD, url);
         Connection connection = null;
         final CountDownLatch latch = new CountDownLatch(1);
 

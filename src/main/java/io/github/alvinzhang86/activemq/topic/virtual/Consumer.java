@@ -1,5 +1,6 @@
 package io.github.alvinzhang86.activemq.topic.virtual;
 
+import io.github.alvinzhang86.activemq.Config;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
@@ -9,7 +10,6 @@ import java.util.*;
  * Created by zhangshuang on 16/3/28.
  */
 public class Consumer {
-    private static final String BROKER_URL = "tcp://101.200.180.127:61616";
 
     private static final Boolean NON_TRANSACTED = false;
 
@@ -31,7 +31,7 @@ public class Consumer {
             try {
                 int i = 0;
                 while (true) {
-                    Message message = null;
+                    Message message;
                     message = this.consumer.receive(TIMEOUT);
                     if (message != null) {
                         if (message instanceof TextMessage) {
@@ -52,13 +52,13 @@ public class Consumer {
 
 
     public static void main(String[] args) {
-        String url = BROKER_URL;
+        String url = Config.BROKER_URL;
         if (args.length > 0) {
             url = args[0].trim();
         }
         System.out.println("waiting... timeout after(s) " + TIMEOUT / 1000);
 
-        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("admin", "admin", url);
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(Config.MQ_USER, Config.MQ_PASSWORD, url);
 
         Connection connection = null;
 

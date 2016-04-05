@@ -1,5 +1,6 @@
 package io.github.alvinzhang86.activemq.selector;
 
+import io.github.alvinzhang86.activemq.Config;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
@@ -9,18 +10,17 @@ import javax.jms.*;
  */
 public class Consumer {
 
-    private static final String BROKER_URL = "tcp://101.200.180.127:61616";
     private static final Boolean NON_TRANSACTED = false;
     private static final long TIMEOUT = 20000;
     private static final Boolean TOPIC = true;
 
     public static void main(String[] args) {
-        String url = BROKER_URL;
+        String url = Config.BROKER_URL;
         if (args.length > 0) {
             url = args[0].trim();
         }
         System.out.println("\nWaiting to receive messages... will timeout after " + TIMEOUT / 1000 +"s");
-        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("admin", "admin", url);
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(Config.MQ_USER, Config.MQ_PASSWORD, url);
         Connection connection = null;
 
         try {

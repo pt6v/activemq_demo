@@ -1,5 +1,6 @@
 package io.github.alvinzhang86.activemq.topic;
 
+import io.github.alvinzhang86.activemq.Config;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
@@ -9,8 +10,6 @@ import javax.jms.*;
  */
 public class Publisher {
 
-    private static final String BROKER_URL = "tcp://101.200.180.127:61616";
-
     private static final Boolean NON_TRANSACTED = false;
 
     private static final int NUM_MESSAGE_TO_SEND = 100;
@@ -18,11 +17,11 @@ public class Publisher {
     private static final long DELAY = 100;
 
     public static void main(String[] args) {
-        String url = BROKER_URL;
+        String url = Config.BROKER_URL;
         if (args.length > 0) {
             url = args[0];
         }
-        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("admin", "admin", url);
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(Config.MQ_USER, Config.MQ_PASSWORD, url);
         Connection connection = null;
 
         try {

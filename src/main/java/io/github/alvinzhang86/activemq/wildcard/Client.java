@@ -1,5 +1,6 @@
 package io.github.alvinzhang86.activemq.wildcard;
 
+import io.github.alvinzhang86.activemq.Config;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQTopic;
 
@@ -11,14 +12,13 @@ import java.util.Scanner;
  */
 public class Client {
     private static final Boolean NON_TRANSACTED = false;
-    private static final String BROKER_URL = "tcp://xxx.xxx.xxx.xxx:61616";
 
     public static void main(String[] args) {
-        String url = BROKER_URL;
+        String url = Config.BROKER_URL;
         if (args.length > 0) {
             url = args[0].trim();
         }
-        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("admin", "password", url);
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(Config.MQ_USER, Config.MQ_PASSWORD, url);
         Connection connection = null;
 
         try {
