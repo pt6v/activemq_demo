@@ -10,3 +10,4 @@ public class Config {
 
     public static final String MQ_PASSWORD = "password";
 }
+

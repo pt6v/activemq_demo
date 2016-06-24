@@ -92,6 +92,10 @@ ActiveMQ中，topic只有在持久订阅（durable subscribe）下是持久化�
 
 同一应用内订阅端failover的问题：由于只能使用单个的持久订阅者，如果这个订阅者出错，则应用就无法处理消息了，系统的健壮性不高。
 
+##### 虚拟Topic示意图
+
+![虚拟Topic](https://raw.githubusercontent.com/AlvinZhang86/image_web/master/activemq/ActiveMQ-VirtualTopic.jpg)
+
 ##### 虚拟Topic建立
 
 对于Publisher来说，消息是一个正常的Topic， 但Topic的名称 必须为
