@@ -8,11 +8,12 @@ import javax.jms.*;
 /**
  * Created by zhangshuang on 16/3/25.
  */
+@SuppressWarnings("Duplicates")
 public class Consumer {
 
     private static final Boolean NON_TRANSACTED = false;
     private static final long TIMEOUT = 20000;
-    private static final Boolean TOPIC = true;
+    private static final Boolean TOPIC = false;
 
     public static void main(String[] args) {
         String url = Config.BROKER_URL;

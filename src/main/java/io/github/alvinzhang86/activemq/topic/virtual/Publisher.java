@@ -28,7 +28,7 @@ public class Publisher {
             connection = connectionFactory.createConnection();
             connection.start();
             Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
-            Topic topic = session.createTopic("VirtualTopic.Test-Topic");
+            Topic topic = session.createTopic("VirtualTopic.Test-Topic"); // 创建一个虚拟topic
 
             MessageProducer producer = session.createProducer(topic);
 //            producer.setDeliveryMode(DeliveryMode.PERSISTENT); // 发送消息时使用持久模式

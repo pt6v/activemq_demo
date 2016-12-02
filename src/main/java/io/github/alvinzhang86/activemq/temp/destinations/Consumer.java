@@ -53,7 +53,7 @@ public class Consumer {
             session.close();
 
         } catch (Exception e) {
-            System.out.println("Caught exception!");
+            System.out.println("Caught exception!"+e.getMessage());
         }
         finally {
             if (connection != null) {

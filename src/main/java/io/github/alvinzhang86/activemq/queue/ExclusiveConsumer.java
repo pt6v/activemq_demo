@@ -8,6 +8,7 @@ import javax.jms.*;
 /**
  * Created by zhangshuang on 16/3/25.
  */
+@SuppressWarnings("Duplicates")
 public class ExclusiveConsumer {
 
     private static final Boolean NON_TRANSACTED = false;
@@ -30,9 +31,14 @@ public class ExclusiveConsumer {
             connection = connectionFactory.createConnection();
             connection.start();
 
+            // 创建一个会话，没有事务，应答机制为自动发送ACK
             Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
 //            Session session = connection.createSession(NON_TRANSACTED,Session.CLIENT_ACKNOWLEDGE);
+
+            // 指定为独占队列
             Destination destination = session.createQueue("test-queue?consumer.exclusive=true");
+
+            // 指定一个消费者消费队列数据
             MessageConsumer consumer = session.createConsumer(destination);
 
             int i = 0;

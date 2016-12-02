@@ -28,9 +28,12 @@ public class Client {
             connection.start();
             Topic destination = new ActiveMQTopic("transacted.client.example");
 
-            Session senderSession = connection.createSession(TRANSACTED, Session.AUTO_ACKNOWLEDGE);
+            // 消息接收方创建非事务会话
             Session receiverSession = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
+
+            // 消息接收方创建消费者
             MessageConsumer receiver = receiverSession.createConsumer(destination);
+            // 设置消费者监听
             receiver.setMessageListener(new MessageListener() {
                 @Override
                 public void onMessage(Message message) {
@@ -45,12 +48,19 @@ public class Client {
                 }
             });
 
+            // 消息发送方创建事务会话
+            Session senderSession = connection.createSession(TRANSACTED, Session.AUTO_ACKNOWLEDGE);
+
+            // 消息发送方创建消息生产者
             MessageProducer sender = senderSession.createProducer(destination);
 
 
             connection.start();
+
             acceptInputFromUser(senderSession, sender);
+
             senderSession.close();
+
             receiverSession.close();
 
         } catch (Exception e) {

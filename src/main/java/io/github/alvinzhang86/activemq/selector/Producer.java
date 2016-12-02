@@ -13,7 +13,7 @@ public class Producer {
     private static final Boolean NON_TRANSACTED = false;
     private static final int NUM_MESSAGES_TO_SEND = 100;
     private static final long DELAY = 1000;
-    private static final Boolean TOPIC = true;
+    private static final Boolean TOPIC = false;
 
     public static void main(String[] args) {
         String url = Config.BROKER_URL;

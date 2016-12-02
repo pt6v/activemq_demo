@@ -30,14 +30,15 @@ public class Consumer {
             Destination destination = session.createQueue("test-queue");
             Destination destinationFoo = session.createQueue("test-queue-foo");
             Destination destinationBar = session.createQueue("test-queue-bar");
-//            Destination destinationTopicFoo = session.createTopic("test-topic-foo");
+            Destination destinationTopicFoo = session.createTopic("test-topic-foo");
 
             MessageConsumer consumer = session.createConsumer(destination);
             MessageConsumer consumerFoo = session.createConsumer(destinationFoo);
             MessageConsumer consumerBar = session.createConsumer(destinationBar);
-//            MessageConsumer consumerTopicFoo = session.createConsumer(destinationTopicFoo);
+            MessageConsumer consumerTopicFoo = session.createConsumer(destinationTopicFoo);
 
             int i = 0;
+            // todo 一个队列的阻塞会引起其他队列收不到消息
             while (true) {
                 Message message = consumer.receive(TIMEOUT);
 
@@ -72,16 +73,16 @@ public class Consumer {
                     break;
                 }
 
-//                message = consumerTopicFoo.receive(TIMEOUT);
+                message = consumerTopicFoo.receive(TIMEOUT);
 
-//                if (message != null) {
-//                    if (message instanceof TextMessage) {
-//                        String text = ((TextMessage) message).getText();
-//                        System.out.println("Got " + i++ + ". message on test-topic-bar: " + text);
-//                    }
-//                } else {
-//                    break;
-//                }
+                if (message != null) {
+                    if (message instanceof TextMessage) {
+                        String text = ((TextMessage) message).getText();
+                        System.out.println("Got " + i++ + ". message on test-topic-bar: " + text);
+                    }
+                } else {
+                    break;
+                }
 
             }
 

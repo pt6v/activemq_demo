@@ -31,8 +31,9 @@ public class ProducerRequestReply {
             Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);
             Destination destination = session.createQueue("test-queue");
             MessageProducer producer = session.createProducer(destination);
-            Destination replyDest = session.createTemporaryQueue(); // 创建监听应答的tempraryQueue
 
+            // 创建监听应答的tempraryQueue
+            Destination replyDest = session.createTemporaryQueue();
             // set up the consumer to handle the reply
             MessageConsumer replyConsumer = session.createConsumer(replyDest); // 创建应答队列的消费者
             replyConsumer.setMessageListener(new MessageListener() { // 监听应答
