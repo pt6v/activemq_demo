@@ -8,6 +8,7 @@ import javax.jms.*;
 /**
  * Created by zhangshuang on 16/3/25.
  */
+@SuppressWarnings("Duplicates")
 public class Producer {
     private static final Boolean NON_TRANSACTED = false;
     private static final int NUM_MESSAGES_TO_SEND = 100;

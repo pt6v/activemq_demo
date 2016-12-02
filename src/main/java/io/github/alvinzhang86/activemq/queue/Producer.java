@@ -8,6 +8,7 @@ import javax.jms.*;
 /**
  * Created by zhangshuang on 16/3/22.
  */
+@SuppressWarnings("Duplicates")
 public class Producer {
 
 
